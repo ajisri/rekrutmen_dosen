@@ -1,0 +1,33 @@
+# CodeIgniter
+/vendor/
+.env
+.env.*
+writable/*
+!writable/index.html
+application/cache/*
+application/logs/*
+!application/cache/index.html
+!application/logs/index.html
+
+# Editor & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Log
+*.log
+
+# NetBeans
+nbproject/
+
+# Node (jika pakai)
+node_modules/
+
+# PHPUnit
+phpunit.xml
+phpunit.xml.dist
+
+Archive.zip
+*.zip
+

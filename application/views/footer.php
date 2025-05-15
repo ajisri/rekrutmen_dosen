@@ -1,0 +1,1 @@
+<footer class="footer text-center"> &copy 2019 Kepegawaian Universitas Diponegoro</footer>
