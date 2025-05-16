@@ -1621,18 +1621,18 @@
                                                                                     if ($tabelpelamar->akreditasi_kampus3 == "A") {
                                                                                         ?>
                                                                                         <option value="<?= $tabelpelamar->akreditasi_kampus3 ?>" selected="" ><?= $tabelpelamar->akreditasi_kampus3 ?></option>
-                                                                                        <option value="B">B</option>
+                                                                                        <option value="B">B / Baik Sekali</option>
                                                                                         <?php
                                                                                     } else if ($tabelpelamar->akreditasi_kampus3 == "B") {
                                                                                         ?>
                                                                                         <option value="<?= $tabelpelamar->akreditasi_kampus3 ?>" selected="" ><?= $tabelpelamar->akreditasi_kampus3 ?></option>
-                                                                                        <option value="A">A</option>
+                                                                                        <option value="A">A / Unggul</option>
                                                                                         <?php
                                                                                     } else {
                                                                                         ?>
                                                                                         <option value="0" selected="">Pilih</option>
-                                                                                        <option value="A">A</option>
-                                                                                        <option value="B">B</option>
+                                                                                        <option value="A">A / Unggul</option>
+													                                    <option value="B">B / Baik Sekali</option>
                                                                                         <?php
                                                                                     }
                                                                                     ?>
@@ -1640,8 +1640,8 @@
                                                                                 } else {
                                                                                     ?>
                                                                                     <option value="0" selected="">Pilih</option>
-                                                                                    <option value="A">A</option>
-                                                                                    <option value="B">B</option>
+                                                                                    <option value="A">A / Unggul</option>
+													                                <option value="B">B / Baik Sekali</option>
                                                                                     <?php
                                                                                 }
                                                                                 ?>
@@ -1681,18 +1681,18 @@
                                                                                     if ($tabelpelamar->akreditasi_prodi3 == "A") {
                                                                                         ?>
                                                                                         <option value="<?= $tabelpelamar->akreditasi_prodi3 ?>" selected="" ><?= $tabelpelamar->akreditasi_prodi3 ?></option>
-                                                                                        <option value="B">B</option>
+                                                                                        <option value="B">B / Baik Sekali</option>
                                                                                         <?php
                                                                                     } else if ($tabelpelamar->akreditasi_prodi3 == "B") {
                                                                                         ?>
                                                                                         <option value="<?= $tabelpelamar->akreditasi_prodi3 ?>" selected="" ><?= $tabelpelamar->akreditasi_prodi3 ?></option>
-                                                                                        <option value="A">A</option>
+                                                                                        <option value="A">A / Unggul</option>
                                                                                         <?php
                                                                                     } else {
                                                                                         ?>
                                                                                         <option value="0" selected="">Pilih</option>
-                                                                                        <option value="A">A</option>
-                                                                                        <option value="B">B</option>
+                                                                                        <option value="A">A / Unggul</option>
+													                                    <option value="B">B / Baik Sekali</option>
                                                                                         <?php
                                                                                     }
                                                                                     ?>
@@ -1700,8 +1700,8 @@
                                                                                 } else {
                                                                                     ?>
                                                                                     <option value="0" selected="">Pilih</option>
-                                                                                    <option value="A">A</option>
-                                                                                    <option value="B">B</option>
+                                                                                    <option value="A">A / Unggul</option>
+													                                <option value="B">B / Baik Sekali</option>
                                                                                     <?php
                                                                                 }
                                                                                 ?>
