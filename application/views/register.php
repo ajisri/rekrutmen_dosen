@@ -98,7 +98,7 @@
 				 }else{
 			?>
 			<span class="d-block text-uppercase g-color-dark-light-v1 g-font-weight-500 g-font-size-13 mb-4"><h5><b>Pendaftaran ditutup. </b></h5></span>
-			<span class="d-block text-uppercase g-color-dark-light-v1 g-font-weight-500 g-font-size-13 mb-2 g-pb-0"><h5><b>Silahkan pantau laman <a href="http://kepegawaian.undip.ac.id" "target"="_blank">Kepegawaian</a></b></h5></span>
+			<span class="d-block text-uppercase g-color-dark-light-v1 g-font-weight-500 g-font-size-13 mb-2 g-pb-0"><h5><b>Silahkan pantau laman <a href="http://dsdm.undip.ac.id" "target"="_blank">Kepegawaian</a></b></h5></span>
 			<?php 
 			}
 			?>

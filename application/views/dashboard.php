@@ -152,7 +152,7 @@
                                     <script type="text/javascript">
                                         swal(
                                           'Selamat Anda Lolos Tahap Seleksi Administrasi, Silahkan download kartu ujian pada menu resume',
-                                          'Pantau laman kepegawaian.undip.ac.id untuk jadwal tes berikutnya',
+                                          'Pantau laman dsdm.undip.ac.id untuk jadwal tes berikutnya',
                                          'success'
                                         )
                                     </script>
@@ -171,7 +171,7 @@
                                     <script type="text/javascript">
                                         swal(
                                           'Selamat Anda Lolos Tahap SKD dan SKB',
-                                          'Pantau laman kepegawaian.undip.ac.id untuk jadwal tes berikutnya',
+                                          'Pantau laman dsdm.undip.ac.id untuk jadwal tes berikutnya',
                                          'success'
                                         )
                                     </script>
@@ -190,7 +190,7 @@
                                     <script type="text/javascript">
                                         swal(
                                           'Selamat Anda diterima sebagai calon dosen tetap Universitas Diponegoro Tahun <?= date("Y"); ?>',
-                                          'Pantau laman kepegawaian.undip.ac.id untuk pengumuman selanjutnya',
+                                          'Pantau laman dsdm.undip.ac.id untuk pengumuman selanjutnya',
                                          'success'
                                         )
                                     </script>

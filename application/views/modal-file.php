@@ -74,7 +74,7 @@
                     <form id="file-data" action="#" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-12">
-                            <p>Pengumuman tanggal tes dapat dilihat pada laman <a href="https://kepegawaian.undip.ac.id/hasil-verifikasi-berkas-online-peserta-tes-seleksi-tenaga-kependidikan-kontrak-universitas-diponegoro-tahun-2020/" target="_blank"> https://kepegawaian.undip.ac.id/</a></p>
+                            <p>Pengumuman tanggal tes dapat dilihat pada laman <a href="https://dsdm.undip.ac.id/hasil-verifikasi-berkas-online-peserta-tes-seleksi-tenaga-kependidikan-kontrak-universitas-diponegoro-tahun-2020/" target="_blank"> https://dsdm.undip.ac.id/</a></p>
                         </div>
                     </div>
                 </div>

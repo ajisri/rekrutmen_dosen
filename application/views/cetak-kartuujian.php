@@ -68,7 +68,7 @@
 			</tr>
 			<tr>
 				<td>Lokasi</td>
-				<td height="90px"> Silahkan pantau laman https://kepegawaian.undip.ac.id/ </td>
+				<td height="90px"> Silahkan pantau laman https://dsdm.undip.ac.id/ </td>
 			</tr>
 		</table>
 		<table>
