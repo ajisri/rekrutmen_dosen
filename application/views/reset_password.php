@@ -62,7 +62,7 @@
                 </table>
             </div>
             <div style="text-align: center; font-size: 12px; color: #b2b2b5; margin-top: 20px">
-                <p>  <a href="http://www.dsdm.undip.ac.id" target="_blank">2020 &copy; Kepegawaian Undip</a></p>
+                <p>  <a href="http://www.dsdm.undip.ac.id" target="_blank">2020 &copy; Direktorat Sumber Daya Undip</a></p>
             </div>
         </div>
     </div>

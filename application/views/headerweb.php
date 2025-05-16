@@ -155,7 +155,7 @@
                       </div>
 					  <div class="col-md-12">
                           <div class="form-group">
-                              <label for="nama" class="control-label">8. Pantau secara berkala laman <a href="http://dsdm.undip.ac.id" "target"="_blank">Kepegawaian Universitas Diponegoro</a> dan <a href="http://https://rekrutmentendik.apps.undip.ac.id/" "target"="_blank">Rekrutmen SDM Universitas Diponegoro untuk update informasi seputar rekrutmen.</b></a></label>
+                              <label for="nama" class="control-label">8. Pantau secara berkala laman <a href="http://dsdm.undip.ac.id" "target"="_blank">Direktorat Sumber Daya Universitas Diponegoro</a> dan <a href="http://https://rekrutmentendik.apps.undip.ac.id/" "target"="_blank">Rekrutmen SDM Universitas Diponegoro untuk update informasi seputar rekrutmen.</b></a></label>
                           </div>
                       </div>
                       <!-- <div class="col-md-12">
@@ -167,7 +167,7 @@
                           <div class="form-group">
                               <!--<label for="nama" class="control-label"><b style="color:red">Gunakan browser terbaru</b></label>-->
                               <!--<label for="nama" class="control-label"><b style="color:red">Harap sesuaikan dengan petunjuk.</b></label><br>-->
-                              <label for="nama" class="control-label"><b style="color:red">Perbarui informasi secara berkala pada laman <a href="http://dsdm.undip.ac.id" "target"="_blank">Kepegawaian Universitas Diponegoro</a> dan <a href="http://https://rekrutmentendik.apps.undip.ac.id/" "target"="_blank">Rekrutmen SDM Universitas Diponegoro.</b></a></label><br>
+                              <label for="nama" class="control-label"><b style="color:red">Perbarui informasi secara berkala pada laman <a href="http://dsdm.undip.ac.id" "target"="_blank">Direktorat Sumber Daya Universitas Diponegoro</a> dan <a href="http://https://rekrutmentendik.apps.undip.ac.id/" "target"="_blank">Rekrutmen SDM Universitas Diponegoro.</b></a></label><br>
                               <!-- <label for="nama" class="control-label"><b style="color:red">Bantuan : 083110110095</b></label> -->
                               <!-- <label for="nama" class="control-label"><b>Bagi Pelamar yang sudah mengisi form isian pendaftaran, namun pada menu cetak (setelah login) tetap kosong, silahkan isi form pendaftaran kembali </b></label>
                               <label for="nama" class="control-label"><b>Bagi Pelamar yang sudah mencetak formulir, diharapkan mencetak formulir ulang sebelum tanggal 3 Oktober 2019 </b></label> -->

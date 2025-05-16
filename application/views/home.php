@@ -33,7 +33,7 @@
 					  
                       <h5><b style="color:black"> Download Surat Pernyataan Tidak Pernah Menjadi Anggota dan Pengurus Organisasi Terlarang<a href="<?php echo base_url('assets/file/pengumuman/Surat Pernyataan bebas parpol.docx') ?>" target="_blank"> Disini</a></h5></b>
                       <h5><b style="color:red"> Download Surat Pernyataan Bebas dari perjanjian/kontrak/ikatan instansi<a href="<?php echo base_url('assets/file/pengumuman/Surat Pernyataan bebas dari instansi.docx') ?>" target="_blank"> Disini</a></h5><br></b>
-					  <!--<h5><b style="color:red">Pengumuman Hasil SKD dan SKB pada laman <a href="https://dsdm.undip.ac.id/hasil-seleksi-tahap-ii-penerimaan-tenaga-kependidikan-kontrak-tkk-universitas-diponegoro-tahun-2020/" target="_blank">Kepegawaian Universitas Diponegoro</a></h5><br>
+					  <!--<h5><b style="color:red">Pengumuman Hasil SKD dan SKB pada laman <a href="https://dsdm.undip.ac.id/hasil-seleksi-tahap-ii-penerimaan-tenaga-kependidikan-kontrak-tkk-universitas-diponegoro-tahun-2020/" target="_blank">Direktorat Sumber Daya Universitas Diponegoro</a></h5><br>
                      <h5><b style="color:red">Pembagian Alokasi Waktu Tes Wawancara <a href="https://dsdm.undip.ac.id/pembagian-alokasi-waktu-tes-wawancara-seleksi-tenaga-kependidikan-kontrak-tkk-undip-tahun-2020/" target="_blank">Klik Disini</a></h5><br></b>-->
                  <!-- <b style="color:red">Pendaftaran telah ditutup</a> -->
                  </b>

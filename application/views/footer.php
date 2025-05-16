@@ -1,1 +1,1 @@
-<footer class="footer text-center"> &copy 2019 Kepegawaian Universitas Diponegoro</footer>
+<footer class="footer text-center"> &copy 2019 Direktorat Sumber Daya Universitas Diponegoro</footer>
