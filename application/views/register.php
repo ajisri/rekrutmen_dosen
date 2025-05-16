@@ -196,6 +196,14 @@
 						  confirmButtonText: "tutup",
 						  closeOnConfirm: true,
 					   })
+          }else if (data['return'] == '5' || data['return'] == 5){
+						swal({
+						  title:"Peringatan",
+						  text:"Email Anda tidak sesuai format",
+						  type: "warning",
+						  confirmButtonText: "tutup",
+						  closeOnConfirm: true,
+					   })
 					}else{
 					  swal({
 						  title:"Peringatan",

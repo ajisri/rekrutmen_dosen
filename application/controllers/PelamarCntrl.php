@@ -904,18 +904,20 @@ class PelamarCntrl extends CI_Controller {
             return;
         }
 
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            echo json_encode(['return' => 'invalid_email']);
-            return;
-        }
-
         // $password = $this->input->post("password");
         
         $password = $this->security->xss_clean($this->input->post("password", TRUE));
         $pass = password_hash($password, PASSWORD_BCRYPT);
         $level = 3;
 
-        if ($cekuser > 0) {
+        if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $return = [
+                'return' => 5
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        }else if ($cekuser > 0) {
             $return = [
                 'return' => 1
             ];
