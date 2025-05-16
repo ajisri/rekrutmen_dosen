@@ -73,7 +73,7 @@
 											$tanggal = new DateTime($row->tanggal_lahir);
 
 											// tanggal hari ini
-											$today = new DateTime('2022-07-01');
+											$today = new DateTime('2025-05-20');
 
 											// tahun
 											$y = $today->diff($tanggal)->y;
