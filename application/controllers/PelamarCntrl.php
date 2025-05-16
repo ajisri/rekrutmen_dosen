@@ -3916,7 +3916,7 @@ class PelamarCntrl extends CI_Controller {
     function preview_file($param) {
         if ($this->session->userdata('nik')) {
             $data = $this->encryption->decrypt(base64_decode($param));
-            $html = '<iframe src="https://rekrutmen.undip.ac.id/' . $data . '" style="border:none; width: 100%; height: 100%"></iframe>';
+            $html = '<iframe src="https://renata.dsdmundip.com/' . $data . '" style="border:none; width: 100%; height: 100%"></iframe>';
             echo $html;
         } else {
             redirect('login');
