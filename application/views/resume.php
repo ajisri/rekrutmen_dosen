@@ -2248,27 +2248,7 @@
 																	}else if(empty($transkrip->path_file)){
 																?>
 																<a href="#" class="pull-right" data-toggle="modal" data-target="#submittranskripkosongModal" ><button type="button" class="btn btn-success dotip" data-toggle="tooltip" title="Submit Pendaftaran">Submit Pendaftaran</button></a>
-																<?php
-																	}else if($tabel->asal_sekolah == "Luar Negeri"){
-																		if(empty($penyetaraan->path_file)){
-																?>
-																<a href="#" class="pull-right" data-toggle="modal" data-target="#submitpenyetaraankosongModal" ><button type="button" class="btn btn-success dotip" data-toggle="tooltip" title="Submit Pendaftaran">Submit Pendaftaran</button></a>
-																	<?php
-																		}
-																	?>
-																<?php
-																	}else if($tabel->asal_sekolah == "Dalam Negeri"){
-																		if(empty($akreditasi->path_file)){
-																?>
-																			<a href="#" class="pull-right" data-toggle="modal" data-target="#submitakreditasiptkosongModal" ><button type="button" class="btn btn-success dotip" data-toggle="tooltip" title="Submit Pendaftaran">Submit Pendaftaran</button></a>
-																	<?php
-																		}else if(empty($akreditasiprodi->path_file)){
-																	?>
-																			<a href="#" class="pull-right" data-toggle="modal" data-target="#submitakreditasipskosongModal" ><button type="button" class="btn btn-success dotip" data-toggle="tooltip" title="Submit Pendaftaran">Submit Pendaftaran</button></a>
-																	<?php
-																		}
-																	
-																	?>
+																
 																	
 																<!--pendidikan profesi-->
 																
@@ -2282,26 +2262,7 @@
 																	}else if(empty($transkrip2->path_file)){
 																?>
 																<a href="#" class="pull-right" data-toggle="modal" data-target="#submittranskrip2kosongModal" ><button type="button" class="btn btn-success dotip" data-toggle="tooltip" title="Submit Pendaftaran">Submit Pendaftaran</button></a>
-																<?php
-																	}else if($tabel->asal_sekolah2 == "Luar Negeri"){
-																		if(empty($penyetaraan2->path_file)){
-																?>
-																<a href="#" class="pull-right" data-toggle="modal" data-target="#submitpenyetaraan2kosongModal" ><button type="button" class="btn btn-success dotip" data-toggle="tooltip" title="Submit Pendaftaran">Submit Pendaftaran</button></a>
-																	<?php
-																		}
-																	?>
-																<?php
-																	}else if($tabel->asal_sekolah2 == "Dalam Negeri"){
-																		if(empty($akreditasi2->path_file)){
-																?>
-																			<a href="#" class="pull-right" data-toggle="modal" data-target="#submitakreditasipt2kosongModal" ><button type="button" class="btn btn-success dotip" data-toggle="tooltip" title="Submit Pendaftaran">Submit Pendaftaran</button></a>
-																	<?php
-																		}else if(empty($akreditasiprodi2->path_file)){
-																	?>
-																			<a href="#" class="pull-right" data-toggle="modal" data-target="#submitakreditasips2kosongModal" ><button type="button" class="btn btn-success dotip" data-toggle="tooltip" title="Submit Pendaftaran">Submit Pendaftaran</button></a>
-																	<?php
-																		}
-																	?>
+																
 																	
 																	<!-- Doktor -->
 																	
