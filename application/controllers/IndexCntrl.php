@@ -15,7 +15,7 @@ class IndexCntrl extends MY_Controller {
         parent::__construct();
         $this->load->helper(array('form', 'url', 'inflector'));
         $this->load->model('Modellogin');
-        $this->load->model('ModelPelamar');
+        $this->load->model('Modelpelamar');
     }
 
     public function index() {
@@ -26,14 +26,14 @@ class IndexCntrl extends MY_Controller {
         }
 
         $date = date("Y-m-d H:i:s");
-        $dateawal = $this->ModelPelamar->readTglbuka()->row();
-        $dateakhir = $this->ModelPelamar->readTgltutup()->row();
-        $row = $this->ModelPelamar->readTgl()->row();
+        $dateawal = $this->Modelpelamar->readTglbuka()->row();
+        $dateakhir = $this->Modelpelamar->readTgltutup()->row();
+        $row = $this->Modelpelamar->readTgl()->row();
         $datepengumuman = $row->tgl_umum_adm;
 
-        $pendaftar = $this->ModelPelamar->read('tb_pelamar', null, null, null)->num_rows();
-        $calon = $this->ModelPelamar->readcalon()->num_rows();
-        $leveluser = $this->ModelPelamar->readleveluser()->num_rows();
+        $pendaftar = $this->Modelpelamar->read('tb_pelamar', null, null, null)->num_rows();
+        $calon = $this->Modelpelamar->readcalon()->num_rows();
+        $leveluser = $this->Modelpelamar->readleveluser()->num_rows();
 
         $calonpendaftar = $calon - $leveluser;
         if ($calonpendaftar < 0) {
@@ -64,9 +64,9 @@ class IndexCntrl extends MY_Controller {
     public function login() {
         ini_set('date.timezone', 'Asia/Jakarta');
         $date = date("Y-m-d H:i:s");
-        $dateawal = $this->ModelPelamar->readTglbuka()->row();
-        $dateakhir = $this->ModelPelamar->readTgltutup()->row();
-        $row = $this->ModelPelamar->readTgl()->row();
+        $dateawal = $this->Modelpelamar->readTglbuka()->row();
+        $dateakhir = $this->Modelpelamar->readTgltutup()->row();
+        $row = $this->Modelpelamar->readTgl()->row();
         $datepengumuman = $row->tgl_umum_adm;
 
         $data = array(
@@ -82,9 +82,9 @@ class IndexCntrl extends MY_Controller {
     public function register() {
         ini_set('date.timezone', 'Asia/Jakarta');
         $date = date("Y-m-d H:i:s");
-        $dateawal = $this->ModelPelamar->readTglbuka()->row();
-        $dateakhir = $this->ModelPelamar->readTgltutup()->row();
-        $row = $this->ModelPelamar->readTgl()->row();
+        $dateawal = $this->Modelpelamar->readTglbuka()->row();
+        $dateakhir = $this->Modelpelamar->readTgltutup()->row();
+        $row = $this->Modelpelamar->readTgl()->row();
         $datepengumuman = $row->tgl_umum_adm;
 
         $data = array(
@@ -99,9 +99,9 @@ class IndexCntrl extends MY_Controller {
 
     public function lupa() {
         $date = date("Y-m-d H:i:s");
-        $dateawal = $this->ModelPelamar->readTglbuka()->row();
-        $dateakhir = $this->ModelPelamar->readTgltutup()->row();
-        $row = $this->ModelPelamar->readTgl()->row();
+        $dateawal = $this->Modelpelamar->readTglbuka()->row();
+        $dateakhir = $this->Modelpelamar->readTgltutup()->row();
+        $row = $this->Modelpelamar->readTgl()->row();
         $datepengumuman = $row->tgl_umum_adm;
 
         $data = array(
