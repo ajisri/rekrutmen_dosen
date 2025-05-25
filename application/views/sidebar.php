@@ -31,8 +31,10 @@
                     <li class="devider"></li>
                     <li> <a href="<?= base_url('formasi') ?>" class="waves-effect" style="font-size: 87%"><i class="fa fa-university fa-fw" data-icon="v"></i><span class="hide-menu"> B. Formasi dan Pendidikan</span></a></li>
                     <li class="devider"></li>
-                    <li> <a href="<?= base_url('lampiran') ?>" class="waves-effect" style="font-size: 92%"><i class="fa fa-paper-plane-o fa-fw" data-icon="v"></i> <span class="hide-menu"> C. Lampiran</span></a></li>
+                    <li> <a href="<?= base_url('publikasi') ?>" class="waves-effect" style="font-size: 92%"><i class="fa fa-newspaper-o fa-fw" data-icon="v"></i> <span class="hide-menu"> C. Bukti Publikasi</span></a></li>
                     <li class="devider"></li> 
+                    <li> <a href="<?= base_url('lampiran') ?>" class="waves-effect" style="font-size: 92%"><i class="fa fa-paper-plane-o fa-fw" data-icon="v"></i> <span class="hide-menu"> D. Lampiran</span></a></li>
+                    <li class="devider"></li>
                     <li> <a href="<?= base_url('resume') ?>" class="waves-effect" style="font-size: 92%"><i class="fa fa-pencil-square-o fa-fw" data-icon="v"></i> <span class="hide-menu">Resume</span></a>
                     </li>
                     <?php

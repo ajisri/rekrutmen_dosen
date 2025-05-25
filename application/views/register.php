@@ -108,7 +108,7 @@
       </div>
       </div>
 	  <div class="col-lg-6 g-mb-170 g-pt-10">
-		<img class="img-fluid" src="<?= base_url('assets/img/19721.jpg')?>" style="width: 90%; display: block; border-radius: 8px;">
+		<img class="img-fluid" src="<?= base_url('assets/img/19721b.jpeg')?>" style="width: 90%; display: block; border-radius: 8px;">
 	  </div>
 	  </div>
 	   </div>

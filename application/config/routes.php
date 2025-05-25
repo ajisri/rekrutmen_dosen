@@ -68,6 +68,7 @@ $route['identitas'] = 'pelamarCntrl/identitas';
 $route['formasi'] = 'pelamarCntrl/formasi';
 $route['pengalaman_kerja'] = 'pelamarCntrl/pengalaman_kerja';
 $route['lampiran'] = 'pelamarCntrl/lampiran';
+$route['publikasi'] = 'pelamarCntrl/publikasi';
 $route['resume'] = 'pelamarCntrl/resume';
 $route['panduan'] = 'pelamarCntrl/panduan';
 $route['pelamar'] = 'pelamarCntrl/index';

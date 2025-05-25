@@ -1533,6 +1533,163 @@
 											<?php
 												}else{}
 											?>
+
+											<form id="add-lampirandrh" action="<?= site_url('PelamarCntrl/addDrhPelamar') ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
+												<div class="col-md-12 m-b-10">
+													<label>Upload Daftar Riwayat Hidup (PDF):</label>
+													<div class="form-group">
+														<div class="col-md-9">
+															<div class="fileinput fileinput-new input-group" data-provides="fileinput">
+																<div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div> <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
+																<input type="file" name="drh[]" multiple> </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> 
+															</div>
+														</div>
+														<div class="col-md-3">
+															<?php
+																if(isset($drh)){
+																$drh_en = base64_encode($this->encryption->encrypt($drh->path_file));
+															?>
+																	<?php
+																if($statuspelamar == NULL){
+															?>
+																<button type="submit" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light">Edit</button>
+															<?php
+																}else{
+															?>
+																<button type="submit" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light" disabled>Edit</button>
+															<?php
+																}
+															?>
+																	<button type="button" class="fcbtn btn btn-outline btn-warning btn-1d waves-effect waves-light">
+																<a href="<?= base_url('PelamarCntrl/preview_file/'.$drh_en); ?>" target="_blank" style="color:black;">Lihat</a>
+																	</button>
+															<?php
+																}else{
+															?>
+																<?php
+																if($statuspelamar == NULL){
+															?>
+																<button type="submit" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light">Upload</button>
+															<?php
+																}else{
+															?>
+																<button type="submit" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light" disabled>Upload</button>
+															<?php
+																}
+															?>
+																<button type="submit" disabled class="fcbtn btn btn-outline btn-default btn-1d waves-effect waves-light">Belum Upload</button>
+															<?php
+																}
+															?>
+														</div>
+													</div>
+												</div>
+											</form>
+
+											<form id="add-lampiranbpk" action="<?= site_url('PelamarCntrl/addBpkPelamar') ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
+												<div class="col-md-12 m-b-10">
+													<label>Upload Bukti Pengalaman Kerja (PDF):</label>
+													<div class="form-group">
+														<div class="col-md-9">
+															<div class="fileinput fileinput-new input-group" data-provides="fileinput">
+																<div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div> <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
+																<input type="file" name="bpk[]" multiple> </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> 
+															</div>
+														</div>
+														<div class="col-md-3">
+															<?php
+																if(isset($bpk)){
+																$bpk_en = base64_encode($this->encryption->encrypt($bpk->path_file));
+															?>
+																	<?php
+																if($statuspelamar == NULL){
+															?>
+																<button type="submit" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light">Edit</button>
+															<?php
+																}else{
+															?>
+																<button type="submit" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light" disabled>Edit</button>
+															<?php
+																}
+															?>
+																	<button type="button" class="fcbtn btn btn-outline btn-warning btn-1d waves-effect waves-light">
+																<a href="<?= base_url('PelamarCntrl/preview_file/'.$bpk_en); ?>" target="_blank" style="color:black;">Lihat</a>
+																	</button>
+															<?php
+																}else{
+															?>
+																<?php
+																if($statuspelamar == NULL){
+															?>
+																<button type="submit" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light">Upload</button>
+															<?php
+																}else{
+															?>
+																<button type="submit" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light" disabled>Upload</button>
+															<?php
+																}
+															?>
+																<button type="submit" disabled class="fcbtn btn btn-outline btn-default btn-1d waves-effect waves-light">Belum Upload</button>
+															<?php
+																}
+															?>
+														</div>
+													</div>
+												</div>
+											</form>
+
+											<form id="add-lampiranbpl" action="<?= site_url('PelamarCntrl/addBplPelamar') ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
+												<div class="col-md-12 m-b-10">
+													<label>Upload Bukti Pelatihan (PDF):</label>
+													<div class="form-group">
+														<div class="col-md-9">
+															<div class="fileinput fileinput-new input-group" data-provides="fileinput">
+																<div class="form-control" data-trigger="fileinput"> <i class="glyphicon glyphicon-file fileinput-exists"></i> <span class="fileinput-filename"></span></div> <span class="input-group-addon btn btn-default btn-file"> <span class="fileinput-new">Select file</span> <span class="fileinput-exists">Change</span>
+																<input type="file" name="bpl[]" multiple> </span> <a href="#" class="input-group-addon btn btn-default fileinput-exists" data-dismiss="fileinput">Remove</a> 
+															</div>
+														</div>
+														<div class="col-md-3">
+															<?php
+																if(isset($bpl)){
+																$bpl_en = base64_encode($this->encryption->encrypt($bpl->path_file));
+															?>
+																	<?php
+																if($statuspelamar == NULL){
+															?>
+																<button type="submit" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light">Edit</button>
+															<?php
+																}else{
+															?>
+																<button type="submit" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light" disabled>Edit</button>
+															<?php
+																}
+															?>
+																	<button type="button" class="fcbtn btn btn-outline btn-warning btn-1d waves-effect waves-light">
+																<a href="<?= base_url('PelamarCntrl/preview_file/'.$bpl_en); ?>" target="_blank" style="color:black;">Lihat</a>
+																	</button>
+															<?php
+																}else{
+															?>
+																<?php
+																if($statuspelamar == NULL){
+															?>
+																<button type="submit" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light">Upload</button>
+															<?php
+																}else{
+															?>
+																<button type="submit" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light" disabled>Upload</button>
+															<?php
+																}
+															?>
+																<button type="submit" disabled class="fcbtn btn btn-outline btn-default btn-1d waves-effect waves-light">Belum Upload</button>
+															<?php
+																}
+															?>
+														</div>
+													</div>
+												</div>
+											</form>
+
 											<form id="add-lampiransertifikat" action="<?= site_url('PelamarCntrl/addSertifikatPelamar') ?>" method="POST" enctype="multipart/form-data" class="form-horizontal">
 												<div class="col-md-12 m-b-10">
 													<label>Upload Toefl (PDF):</label>
@@ -1585,6 +1742,7 @@
 												</div>
 											</form>
 									</div>
+									<button type="button" class="fcbtn btn btn-outline btn-info btn-1d waves-effect waves-light pull-right" onclick="nextPage()">Next</button>
 								</div>
 							</div>
 						</div>
@@ -1609,6 +1767,9 @@
 						<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 						<!--<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5/jquery.min.js"></script>-->
 						<script type="text/javascript">
+							function nextPage() {
+								window.location.href = "resume";
+							}
 							$(document).ready(function() {
 								$('#add-lampiransuratlamaran').submit(function(e){
 						            e.preventDefault();
@@ -2364,6 +2525,90 @@
 						            });
 						        });	
 							});
+
+							$(document).ready(function() {
+								$('#add-lampiranbpk').submit(function(e){
+						            e.preventDefault();
+						            var formData = new FormData($(this)[0]);
+						            $.ajax({
+						                url: '<?= site_url('PelamarCntrl/addBpkPelamar') ?>',
+						                data:formData,
+						                type:'POST',
+						                contentType: false,
+						                processData: false,
+						                success:function(data){
+						                    if (data['return'] == 2) {
+												notification._toast('Success','Input Data','success');
+						                        setTimeout(function () {
+													location.reload();
+												}, 500);
+											}else if (data['return'] == 4) {
+						                        notification._toast('Error','Ukuran file harus kurang dari 400 kb','error');
+											}else if (data['return'] == 5) {
+						                        notification._toast('Error','File harus bertipe pdf','error');
+						                    }else{
+						                        notification._toast('Error','Gagal Menyimpan','error');
+						                    }
+						                }
+						            });
+						        });	
+							});
+
+							$(document).ready(function() {
+								$('#add-lampiranbpl').submit(function(e){
+						            e.preventDefault();
+						            var formData = new FormData($(this)[0]);
+						            $.ajax({
+						                url: '<?= site_url('PelamarCntrl/addBplPelamar') ?>',
+						                data:formData,
+						                type:'POST',
+						                contentType: false,
+						                processData: false,
+						                success:function(data){
+						                    if (data['return'] == 2) {
+												notification._toast('Success','Input Data','success');
+						                        setTimeout(function () {
+													location.reload();
+												}, 500);
+											}else if (data['return'] == 4) {
+						                        notification._toast('Error','Ukuran file harus kurang dari 400 kb','error');
+											}else if (data['return'] == 5) {
+						                        notification._toast('Error','File harus bertipe pdf','error');
+						                    }else{
+						                        notification._toast('Error','Gagal Menyimpan','error');
+						                    }
+						                }
+						            });
+						        });	
+							});
+
+							$(document).ready(function() {
+								$('#add-lampirandrh').submit(function(e){
+						            e.preventDefault();
+						            var formData = new FormData($(this)[0]);
+						            $.ajax({
+						                url: '<?= site_url('PelamarCntrl/addDrhPelamar') ?>',
+						                data:formData,
+						                type:'POST',
+						                contentType: false,
+						                processData: false,
+						                success:function(data){
+						                    if (data['return'] == 2) {
+												notification._toast('Success','Input Data','success');
+						                        setTimeout(function () {
+													location.reload();
+												}, 500);
+											}else if (data['return'] == 4) {
+						                        notification._toast('Error','Ukuran file harus kurang dari 400 kb','error');
+											}else if (data['return'] == 5) {
+						                        notification._toast('Error','File harus bertipe pdf','error');
+						                    }else{
+						                        notification._toast('Error','Gagal Menyimpan','error');
+						                    }
+						                }
+						            });
+						        });	
+							});
 							
 							$(document).ready(function() {
 								$('#add-lampiransertifikat').submit(function(e){
@@ -2445,11 +2690,11 @@
 <?php
 	if($tabelpelamar->nama_pelamar == null){
 ?>
-<div id="alerttopright" class="myadmin-alert myadmin-alert-img alert-warning myadmin-alert-top-right"><img src="<?= base_url('temp/plugins/images/users/default.jpg') ?>" class="img" alt="img"><a href="#" class="closed">&times;</a><h4></h4> <b>Hi!,</b> Jangan lupa pastikan file tersimpan.</div>
+<div id="alerttopright" class="myadmin-alert myadmin-alert-img alert-warning myadmin-alert-top-right"><img src="<?= base_url('temp/plugins/images/users/default.jpg') ?>" class="img" alt="img"><a href="#" class="closed">&times;</a><h4></h4> <b>Hi!,</b> Pastikan file tersimpan dengan munculnya tombol Lihat.</div>
 <?php
 	}else{
 ?>
-<div id="alerttopright" class="myadmin-alert myadmin-alert-img alert-warning myadmin-alert-top-right"><img src="<?= base_url('temp/plugins/images/users/default.jpg') ?>" class="img" alt="img"><a href="#" class="closed">&times;</a><h4></h4> <b><?= $tabelpelamar->nama_pelamar?>,</b> Jangan lupa pastikan file tersimpan.</div>
+<div id="alerttopright" class="myadmin-alert myadmin-alert-img alert-warning myadmin-alert-top-right"><img src="<?= base_url('temp/plugins/images/users/default.jpg') ?>" class="img" alt="img"><a href="#" class="closed">&times;</a><h4></h4> <b><?= $tabelpelamar->nama_pelamar?>,</b> Pastikan file tersimpan dengan munculnya tombol Lihat.</div>
 <?php
 	}
 ?>

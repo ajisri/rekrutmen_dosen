@@ -77,7 +77,7 @@
           </div>
 		  
 		  <div class="col-lg-6 g-mb-50">
-            <img class="img-fluid" src="<?= base_url('assets/img/19721.jpg')?>" style="width: 100%; display: block">
+            <img class="img-fluid" src="<?= base_url('assets/img/19721b.jpeg')?>" style="width: 100%; display: block">
           </div>
 		  
         </div>

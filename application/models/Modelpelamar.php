@@ -44,6 +44,17 @@
 			return $query;
 		}
 
+		function cekidfilepublikasi($valueid, $id_publikasi){
+			$this->db->select('*');
+			$this->db->from('file_uploadpublikasi');
+			$this->db->where('file_uploadpublikasi.id_pelamar=', $valueid);
+			$this->db->where('file_uploadpublikasi.id_publikasi=', $id_publikasi);
+
+			$query = $this->db->get('');
+
+			return $query;
+		}
+
 		function cekidfile($valueid, $kategori){
 			$this->db->select('*');
 			$this->db->from('file_upload');
@@ -274,6 +285,13 @@
 			$query = $this->db->query('select * from file_upload where kode_unik="$kode_unik" ');
 			return $query;
 		}
+
+		public function isFileNameExists($fileName, $table) {
+			$this->db->where('nama_file', $fileName);
+			$query = $this->db->get($table);
+			return $query->num_rows() > 0; // Mengembalikan true jika nama file sudah ada
+		}
+
 		
 		function cekIdFileUpload($idfile){
 			$query = $this->db->query('select * from file_upload where id_file = ".$idfile." ');
@@ -405,6 +423,13 @@
 			$query = $this->db->query("select asal_sekolah from tb_asalsekolah where asal_sekolah != '$pelamarasalsekolah'");
 			return $query;
 		}
+
+		function getSelectedPublikasi($nik) {
+			$this->db->select('id_jenispublikasi');
+			$this->db->from('tb_publikasi');
+			$this->db->where('nik', $nik);
+			return $this->db->get()->row(); // Hanya ambil ID yang dipilih (jika ada)
+		}
 		
 		function pilihanAgama($pelamaragama){
 			$query = $this->db->query("select agama from tb_agama where agama != '$pelamaragama'");
@@ -450,7 +475,30 @@
 
 			return $idtabel;
 		}
-		
+
+		function readDataPelamarPublikasi($nik) {
+    $query = $this->db->query("
+        SELECT tb_publikasi.*, 
+               tb_jenispublikasi.jenis_publikasi, 
+               file_uploadpublikasi.path_file 
+        FROM tb_publikasi 
+        LEFT JOIN tb_jenispublikasi ON tb_publikasi.id_jenispublikasi = tb_jenispublikasi.id_jenispublikasi 
+        LEFT JOIN file_uploadpublikasi ON tb_publikasi.id_publikasi = file_uploadpublikasi.id_publikasi 
+        WHERE tb_publikasi.nik = '$nik'
+    ");
+    return $query->result();
+}
+
+		function readDataPelamarPublikasiId($id){
+			$query = $this->db->query("select * from tb_publikasi left join tb_jenispublikasi on tb_publikasi.id_jenispublikasi = tb_jenispublikasi.id_jenispublikasi where tb_publikasi.id_publikasi = '$id'");
+			return $query;
+		}
+
+		function readDataPelamarPublikasiExceptId($id){
+			$query = $this->db->query("select * from tb_jenispublikasi where id_jenispublikasi != '$id'");
+			return $query;
+		}
+
 		function readDataPelamar($nik){
 			$query = $this->db->query("select * from tb_pelamar where ktp = '$nik'");
 			return $query;
@@ -469,6 +517,10 @@
 		function readDataVerifikasiPelamarId($id){
 			$query = $this->db->query("select * from tb_pelamar left join tb_dataverifikasi on tb_pelamar.id_pelamar = tb_dataverifikasi.id_pelamardataverifikasi where tb_pelamar.id_pelamar = '$id'");
 			return $query;
+		}
+
+		function getAllJenisPublikasi() {
+			return $this->db->get('tb_jenispublikasi')->result(); // Ambil semua data dari tb_jenispublikasi
 		}
 		
 		function readAgama($nik){

@@ -696,6 +696,30 @@ class PelamarCntrl extends CI_Controller {
         $this->load->view('tabel-pelamar', $data);
     }
 
+    public function getTabelpublikasipelamar() {
+        $nik = $this->session->userdata('nik');
+        if (!is_numeric($nik)) {
+            return false;
+        }
+        $rowidpelamar = $this->Modelpelamar->read('tb_pelamar', ['ktp' => $nik], null, null)->row();
+        $idpelamar = $rowidpelamar->id_pelamar;
+        $row = $this->Modelpelamar->readTgl()->row();
+        $datepengumuman = $row->tgl_umum_adm;
+        $datepengumumanskdskb = $row->tgl_pengumuman_skdskb;
+        $datepengumumanfinal = $row->tgl_final;
+        
+        $sorting = $this->Modelpelamar->readDataPelamarPublikasi($idpelamar);
+        $data = [
+            'tabel' => $sorting,
+            'nik' => $nik,
+            'datepengumuman' => $datepengumuman,
+            'pengumumanfinal' => $datepengumumanfinal,
+            'dateskdskb' => $datepengumumanskdskb,
+        ];
+
+        $this->load->view('tabel-publikasipelamar', $data);
+    }
+
     public function getFileTable() {
         $level = $this->session->userdata('level');
         if ($level == '') {
@@ -2433,6 +2457,191 @@ class PelamarCntrl extends CI_Controller {
         $this->load->view('tabel-pengalamankerja', $data);
     }
 
+    function publikasi() {
+        $nik = $this->session->userdata('nik');
+        if (empty($nik)) {
+            redirect(site_url('dashboard'));
+        } else {
+            $yearnow = (int) date('Y', strtotime('now'));
+
+            $date = date("Y-m-d H:i:s");
+            $dateawal = $this->Modelpelamar->readTglbuka()->row();
+            $dateakhir = $this->Modelpelamar->readTgltutup()->row();
+            $row = $this->Modelpelamar->readTgl()->row();
+            $datepengumuman = $row->tgl_umum_adm;
+
+            $row = $this->Modelpelamar->read('tb_pelamar', ['ktp' => $nik], null, null)->row();
+            $id_pelamar = $row->id_pelamar;
+            $all_publikasi = $this->Modelpelamar->getAllJenisPublikasi();
+    
+            // Cek apakah pelamar sudah memilih publikasi (opsional)
+            $selected_id = $this->Modelpelamar->getSelectedPublikasi($nik);
+
+            $tabel = $this->Modelpelamar->readDataPelamar($nik)->row();
+            $statuspelamar = $tabel->status;
+            $status_simpanpublikasi = $tabel->status_simpanpublikasi;
+            $data = [
+                'title' => 'REKRUTMEN SDM UNDIP',
+                'time' => date('l, d-m-Y', strtotime("now")),
+                'date' => $date,
+                'datebuka' => $dateawal->tgl_buka,
+                'datetutup' => $dateakhir->tgl_tutup,
+                'datepengumuman' => $datepengumuman,
+                'nik' => $nik,
+                'all_publikasi' => $all_publikasi,
+                'selected_id' => $selected_id ? $selected_id->id_jenispublikasi : null,
+                'statuspelamar' => $statuspelamar,
+                'status_simpanpublikasi' => $status_simpanpublikasi,
+                'tabel' => $tabel
+            ];
+            return $this->load->view('publikasi', $data);
+        }
+    }
+
+    public function addPublikasiPelamar() {
+        $nik = $this->session->userdata('nik');
+        $tahun = (int)date('Y');
+        $row = $this->Modelpelamar->read('tb_pelamar', ['ktp' => $nik], null, null)->row();
+        $id_pelamar = $row->id_pelamar;
+
+        $t = $_FILES['publikasi']['name'];
+        $s = $_FILES['publikasi']['size'];
+        $size = implode("|", $s);
+        $ext = implode("|", $t);
+        $tipe = pathinfo($ext, PATHINFO_EXTENSION);
+
+        if ($this->input->post('publikasi') == '') {
+            $return = ['return' => 1];
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        } else if ($this->input->post('url_publikasi') == '') {
+            $return = ['return' => 2];
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        } else if ($ext == '') {
+            $return = ['return' => 3];
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        } else if ($size > 400000) {
+            $return = ['return' => 4];
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        } else if ($tipe != 'pdf') {
+            $return = ['return' => 5];
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        } else {
+            $data = [
+                'nik' => $id_pelamar,
+                'id_jenispublikasi' => $this->input->post('publikasi'),
+                'url_publikasi' => $this->security->xss_clean($this->input->post('url_publikasi', TRUE)),
+            ];
+
+            // Insert dan dapatkan id publikasi
+            $this->Modelpelamar->create('tb_publikasi', $data);
+            $id_publikasi = $this->db->insert_id();
+
+            $datasimpanpublikasi = [
+                'status_simpanpublikasi' => $this->input->post('status_simpanpublikasi'),
+            ];
+
+            $this->Modelpelamar->update(['ktp' => $nik], 'tb_pelamar', $datasimpanpublikasi);
+
+            // Panggil upload dengan parameter id_publikasi
+            $uploadSuccess = $this->upload_filespublikasi($id_pelamar, $id_publikasi, 'publikasi', 'file_uploadpublikasi', '/assets/file/publikasi/', $_FILES['publikasi']);
+
+            if ($uploadSuccess) {
+                $return = ['return' => 6];
+            } else {
+                $return = ['return' => 7]; // Gagal upload file
+            }
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        }
+    }
+
+    public function editPublikasi() {
+        $id = $this->input->get('id');
+        $nik = $this->session->userdata('nik');
+        $tabel = $this->Modelpelamar->readDataPelamarPublikasiId($id)->row();
+        $publikasiid = $tabel->id_jenispublikasi;
+        $tabelresult = $this->Modelpelamar->readDataPelamarPublikasiExceptId($publikasiid)->result();
+        $tabell = $this->Modelpelamar->readDataPelamar($nik)->row();
+        $statuspelamar = $tabell->status;
+        $row = $this->Modelpelamar->read('tb_pelamar', ['ktp' => $nik], null, null)->row();
+        $id_pelamar = $row->id_pelamar;
+        $publikasi = $this->Modelpelamar->read('file_uploadpublikasi', ['id_pelamar' => $id_pelamar, 'id_publikasi' => $id], null, null)->row();
+
+        $jenispublikasi = $this->Modelpelamar->read('tb_publikasi', ['id_publikasi' => $id], null, null)->row();
+
+        $this->load->view('edit-publikasipelamar', ['tabel' => $tabel, 'tabelresult' => $tabelresult, 'publikasi' => $publikasi, 'statuspelamar' => $statuspelamar]);
+    }
+
+public function editPublikasiPelamar() {
+    $nik = $this->session->userdata('nik');
+    $idpublikasi = (int) $this->input->post("id");
+    $tahun = (int) date('Y', strtotime('now'));
+    $row = $this->Modelpelamar->read('tb_pelamar', ['ktp' => $nik], null, null)->row();
+    $id_pelamar = $row->id_pelamar;
+
+    $t = $_FILES['publikasi']['name'];
+    $s = $_FILES['publikasi']['size'];
+    $size = implode("|", $s);
+    $ext = implode("|", $t);
+    $tipe = pathinfo($ext, PATHINFO_EXTENSION);
+
+    if ($this->input->post('editjenis_publikasi') == '') {
+        $return = ['return' => 1];
+        header('Content-Type: application/json');
+        echo json_encode($return);
+    } else if ($this->input->post('editurl_publikasi') == '') {
+        $return = ['return' => 2];
+        header('Content-Type: application/json');
+        echo json_encode($return);
+    } else if ($ext == '') {
+        $return = ['return' => 3];
+        header('Content-Type: application/json');
+        echo json_encode($return);
+    } else if ($size > 400000) {
+        $return = ['return' => 4];
+        header('Content-Type: application/json');
+        echo json_encode($return);
+    } else if ($tipe != 'pdf') {
+        $return = ['return' => 5];
+        header('Content-Type: application/json');
+        echo json_encode($return);
+    } else {
+        $data = [
+            'nik' => $id_pelamar,
+            'id_jenispublikasi' => $this->input->post('editjenis_publikasi'),
+            'url_publikasi' => $this->security->xss_clean($this->input->post('editurl_publikasi', TRUE)),
+        ];
+
+        // Update data publikasi
+        $this->Modelpelamar->update(['id_publikasi' => $idpublikasi], 'tb_publikasi', $data);
+
+        $datasimpanpublikasi = [
+            'status_simpanpublikasi' => $this->input->post('status_simpanpublikasi'),
+        ];
+
+        // Update status pelamar
+        $this->Modelpelamar->update(['ktp' => $nik], 'tb_pelamar', $datasimpanpublikasi);
+
+        // Panggil upload untuk edit file
+        $uploadSuccess = $this->uploadedit_filespublikasi($id_pelamar, $idpublikasi, 'publikasi', 'file_uploadpublikasi', '/assets/file/publikasi/', $_FILES['publikasi']);
+
+        if ($uploadSuccess) {
+            $return = ['return' => 6];
+        } else {
+            $return = ['return' => 7]; // Gagal upload file
+        }
+
+        header('Content-Type: application/json');
+        echo json_encode($return);
+    }
+}
+
     function lampiran() {
         $nik = $this->session->userdata('nik');
         if (empty($nik)) {
@@ -2475,6 +2684,9 @@ class PelamarCntrl extends CI_Controller {
             $penyetaraan3 = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'penyetaraan3'], null, null)->row();
             $akreditasi3 = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'akreditasi3'], null, null)->row();
             $akreditasiprodi3 = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'akreditasiprodi3'], null, null)->row();
+            $bpk = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'bpk'], null, null)->row();
+            $bpl = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'bpl'], null, null)->row();
+            $drh = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'drh'], null, null)->row();
             $sertifikat = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'sertifikat'], null, null)->row();
 
             $tabelpelamar = $this->Modelpelamar->readDataPelamar($nik)->row();
@@ -2515,6 +2727,9 @@ class PelamarCntrl extends CI_Controller {
                 'penyetaraan3' => $penyetaraan3,
                 'akreditasi3' => $akreditasi3,
                 'akreditasiprodi3' => $akreditasiprodi3,
+                'bpk' => $bpk,
+                'bpl' => $bpl,
+                'drh' => $drh,
                 'sertifikat' => $sertifikat,
                 'statuspelamar' => $statuspelamar,
                 'nik' => $nik
@@ -3714,6 +3929,138 @@ class PelamarCntrl extends CI_Controller {
         }
     }
 
+    function addBpkPelamar() {
+        $nik = $this->session->userdata('nik');
+        $yearnow = (int) date('Y', strtotime('now'));
+
+        $date = date("Y-m-d H:i:s");
+        $dateawal = $this->Modelpelamar->readTglbuka()->row();
+        $dateakhir = $this->Modelpelamar->readTgltutup()->row();
+        $row = $this->Modelpelamar->readTgl()->row();
+        $datepengumuman = $row->tgl_umum_adm;
+        $tabelpelamar = $this->Modelpelamar->readDataPelamar($nik)->row();
+        $row = $this->Modelpelamar->read('tb_pelamar', ['ktp' => $nik], null, null)->row();
+        $id_pelamar = $row->id_pelamar;
+
+        $t = $_FILES['bpk']['name'];
+        $s = $_FILES['bpk']['size'];
+        $size = implode("|", $s);
+        $ext = implode("|", $t);
+        $tipe = pathinfo($ext, PATHINFO_EXTENSION);
+
+        if ($size > 400000) {
+            $return = [
+                'return' => 4
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        } else if ($tipe != 'pdf') {
+            $return = [
+                'return' => 5
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        } else {
+            $this->upload_files($id_pelamar, 'bpk', 'nik', 'file_upload', '/assets/file/bpk/', 'bpk', $_FILES['bpk']);
+            $return = [
+                'return' => 2
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        }
+    }
+
+    function addBplPelamar() {
+        $nik = $this->session->userdata('nik');
+        $yearnow = (int) date('Y', strtotime('now'));
+
+        $date = date("Y-m-d H:i:s");
+        $dateawal = $this->Modelpelamar->readTglbuka()->row();
+        $dateakhir = $this->Modelpelamar->readTgltutup()->row();
+        $row = $this->Modelpelamar->readTgl()->row();
+        $datepengumuman = $row->tgl_umum_adm;
+        $tabelpelamar = $this->Modelpelamar->readDataPelamar($nik)->row();
+        $row = $this->Modelpelamar->read('tb_pelamar', ['ktp' => $nik], null, null)->row();
+        $id_pelamar = $row->id_pelamar;
+
+        $t = $_FILES['bpl']['name'];
+        $s = $_FILES['bpl']['size'];
+        $size = implode("|", $s);
+        $ext = implode("|", $t);
+        $tipe = pathinfo($ext, PATHINFO_EXTENSION);
+
+        if ($size > 400000) {
+            $return = [
+                'return' => 4
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        } else if ($tipe != 'pdf') {
+            $return = [
+                'return' => 5
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        } else {
+            $this->upload_files($id_pelamar, 'bpl', 'nik', 'file_upload', '/assets/file/bpl/', 'bpl', $_FILES['bpl']);
+            $return = [
+                'return' => 2
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        }
+    }
+
+    function addDrhPelamar() {
+        $nik = $this->session->userdata('nik');
+        $yearnow = (int) date('Y', strtotime('now'));
+
+        $date = date("Y-m-d H:i:s");
+        $dateawal = $this->Modelpelamar->readTglbuka()->row();
+        $dateakhir = $this->Modelpelamar->readTgltutup()->row();
+        $row = $this->Modelpelamar->readTgl()->row();
+        $datepengumuman = $row->tgl_umum_adm;
+        $tabelpelamar = $this->Modelpelamar->readDataPelamar($nik)->row();
+        $row = $this->Modelpelamar->read('tb_pelamar', ['ktp' => $nik], null, null)->row();
+        $id_pelamar = $row->id_pelamar;
+
+        $t = $_FILES['drh']['name'];
+        $s = $_FILES['drh']['size'];
+        $size = implode("|", $s);
+        $ext = implode("|", $t);
+        $tipe = pathinfo($ext, PATHINFO_EXTENSION);
+
+        if ($size > 400000) {
+            $return = [
+                'return' => 4
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        } else if ($tipe != 'pdf') {
+            $return = [
+                'return' => 5
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        } else {
+            $this->upload_files($id_pelamar, 'drh', 'nik', 'file_upload', '/assets/file/drh/', 'drh', $_FILES['drh']);
+            $return = [
+                'return' => 2
+            ];
+
+            header('Content-Type: application/json');
+            echo json_encode($return);
+        }
+    }
+
     function addSertifikatPelamar() {
         $nik = $this->session->userdata('nik');
         $yearnow = (int) date('Y', strtotime('now'));
@@ -3918,7 +4265,8 @@ class PelamarCntrl extends CI_Controller {
     function preview_file($param) {
         if ($this->session->userdata('nik')) {
             $data = $this->encryption->decrypt(base64_decode($param));
-            $html = '<iframe src="https://renata.dsdmundip.com/' . $data . '" style="border:none; width: 100%; height: 100%"></iframe>';
+            // $html = '<iframe src="https://renata.dsdmundip.com/' . $data . '" style="border:none; width: 100%; height: 100%"></iframe>';
+            $html = '<iframe src="http://localhost/rekrutmen_dosen/' . $data . '" style="border:none; width: 100%; height: 100%"></iframe>';
             echo $html;
         } else {
             redirect('login');
@@ -6698,8 +7046,16 @@ class PelamarCntrl extends CI_Controller {
             'upload_path' => '.' . $path,
             'allowed_types' => 'pdf|jpeg|jpg|png',
             'overwrite' => 1,
-            'max_size' => '400'
+            'max_size' => '400' // 400KB
         );
+
+        // Cek file lama di database
+        $existingFile = $this->Modelpelamar->cekidfile($valueid, $kategori)->row();
+
+        // Jika file lama ada, hapus dulu dari server sebelum upload baru
+        if ($existingFile && file_exists('.' . $existingFile->path_file)) {
+            unlink('.' . $existingFile->path_file);
+        }
 
         $this->load->library('upload', $config);
 
@@ -6758,6 +7114,169 @@ class PelamarCntrl extends CI_Controller {
         }
         return true;
     }
+
+    private function upload_filespublikasi($id_pelamar, $id_publikasi, $kategori, $table, $relativePath, $files) {
+        // Tentukan path folder absolut berdasarkan id pelamar
+        $folderPath = FCPATH . ltrim($relativePath, '/') . $id_pelamar . '/';
+
+        // Cek apakah folder sudah ada, jika tidak, buat folder
+        if (!is_dir($folderPath)) {
+            if (!mkdir($folderPath, 0755, true)) {
+                log_message('error', 'Gagal membuat folder: ' . $folderPath);
+                return false; // Kembalikan false jika gagal membuat folder
+            } else {
+                log_message('info', 'Folder berhasil dibuat: ' . $folderPath);
+            }
+        } else {
+            log_message('info', 'Folder sudah ada: ' . $folderPath);
+        }
+
+        // Konfigurasi upload
+        $config = array(
+            'upload_path'   => $folderPath,
+            'allowed_types' => 'pdf|jpeg|jpg|png',
+            'overwrite'     => 0,
+            'max_size'      => '400' // 400KB
+        );
+
+        $this->load->library('upload', $config);
+
+        foreach ($files['name'] as $key => $image) {
+            $_FILES['images[]']['name']     = $files['name'][$key];
+            $_FILES['images[]']['type']     = $files['type'][$key];
+            $_FILES['images[]']['tmp_name'] = $files['tmp_name'][$key];
+            $_FILES['images[]']['error']    = $files['error'][$key];
+            $_FILES['images[]']['size']     = $files['size'][$key];
+
+            $baseName = $kategori . '-' . $id_pelamar;
+            $ext = pathinfo($files['name'][$key], PATHINFO_EXTENSION);
+
+            $name = $baseName;
+            $counter = 1;
+            while ($this->Modelpelamar->isFileNameExists($name, $table)) {
+                $name = $baseName . $counter;
+                $counter++;
+            }
+
+            $config['file_name'] = $name;
+            $this->upload->initialize($config);
+
+            if ($this->upload->do_upload('images[]')) {
+                $uploadData = $this->upload->data();
+
+                $data = [
+                    'id_pelamar'    => $id_pelamar,
+                    'id_publikasi'  => $id_publikasi,
+                    'nama_file'     => $name,
+                    'path_file'     => $relativePath . $id_pelamar . '/' . $uploadData['file_name'],
+                    'kesesuaian'    => 'Sesuai Kualifikasi'
+                ];
+
+                $this->Modelpelamar->create($table, $data);
+            } else {
+                log_message('error', 'Upload gagal: ' . $this->upload->display_errors());
+                return false; 
+            }
+        }
+
+        return true;
+    }
+
+private function uploadedit_filespublikasi($id_pelamar, $id_publikasi, $kategori, $table, $relativePath, $files) {
+    // Tentukan path folder absolut berdasarkan id pelamar
+    $folderPath = FCPATH . ltrim($relativePath, '/') . $id_pelamar . '/';
+
+    // Cek apakah folder sudah ada, jika tidak, buat folder
+    if (!is_dir($folderPath)) {
+        if (!mkdir($folderPath, 0755, true)) {
+            log_message('error', 'Gagal membuat folder: ' . $folderPath);
+            return false; // Kembalikan false jika gagal membuat folder
+        } else {
+            log_message('info', 'Folder berhasil dibuat: ' . $folderPath);
+        }
+    } else {
+        log_message('info', 'Folder sudah ada: ' . $folderPath);
+    }
+
+    // Konfigurasi upload
+    $config = array(
+        'upload_path'   => $folderPath,
+        'allowed_types' => 'pdf|jpeg|jpg|png',
+        'overwrite'     => 1, // Mengizinkan overwrite file lama
+        'max_size'      => '400' // 400KB
+    );
+
+    $this->load->library('upload', $config);
+
+    // Cek file lama di database
+    $existingFile = $this->Modelpelamar->cekidfilepublikasi($id_pelamar, $id_publikasi)->row();
+
+    if ($existingFile) {
+        // Check if the property exists before accessing it
+        if (property_exists($existingFile, 'id_filepublikasi')) {
+            $fileName = basename($existingFile->path_file);
+            $filePath = $folderPath . $fileName;
+            
+            log_message('info', 'Path file lama: ' . $filePath);
+            if (file_exists($filePath)) {
+                unlink($filePath);
+                log_message('info', 'File lama berhasil dihapus: ' . $filePath);
+            } else {
+                log_message('error', 'File lama tidak ditemukan: ' . $filePath);
+            }
+        } else {
+            log_message('error', 'id_filepublikasi tidak ada dalam existingFile.');
+        }
+    } else {
+        log_message('error', 'Tidak ada file yang ditemukan untuk id_pelamar: ' . $id_pelamar);
+    }
+
+    // Lanjutkan dengan proses upload...
+    foreach ($files['name'] as $key => $image) {
+        $_FILES['images[]']['name']     = $files['name'][$key];
+        $_FILES['images[]']['type']     = $files['type'][$key];
+        $_FILES['images[]']['tmp_name'] = $files['tmp_name'][$key];
+        $_FILES['images[]']['error']    = $files['error'][$key];
+        $_FILES['images[]']['size']     = $files['size'][$key];
+
+        $baseName = $kategori . '-' . $id_pelamar;
+        $ext = pathinfo($files['name'][$key], PATHINFO_EXTENSION);
+
+        $name = $baseName;
+        $counter = 1;
+        while ($this->Modelpelamar->isFileNameExists($name, $table)) {
+            $name = $baseName . $counter;
+            $counter++;
+        }
+
+        $config['file_name'] = $name;
+        $this->upload->initialize($config);
+
+        if ($this->upload->do_upload('images[]')) {
+            $uploadData = $this->upload->data();
+
+            $data = [
+                'id_pelamar'    => $id_pelamar,
+                'id_publikasi'  => $id_publikasi,
+                'nama_file'     => $name,
+                'path_file'     => $relativePath . $id_pelamar . '/' . $uploadData['file_name'],
+                'kesesuaian'    => 'Sesuai Kualifikasi'
+            ];
+
+            // Update atau insert data file
+            if ($existingFile && property_exists($existingFile, 'id_filepublikasi')) {
+                $this->Modelpelamar->update(['id_filepublikasi' => $existingFile->id_filepublikasi], $table, $data);
+            } else {
+                $this->Modelpelamar->create($table, $data);
+            }
+        } else {
+            log_message('error', 'Upload gagal: ' . $this->upload->display_errors());
+            return false; 
+        }
+    }
+
+    return true;
+}
 
     private function upload_filesgambar($valueid, $kategori, $id, $table, $path, $title, $files) {
         $config = array(

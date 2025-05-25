@@ -74,184 +74,102 @@
 											<button type="button" class="btn btn-info"><a href="<?= site_url('identitas') ?>"><span style="color: white">Edit</a></button>
 											<hr class="m-t-0 m-b-40">
                                             <div class="row">
-												<div class="form-group">
-													<div class="col-md-6">
-														<label class="control-label col-md-3">Nama Lengkap:</label>
-														<div class="">
-														<?php
-															if(isset($tabel->nama_pelamar)){
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"><?= $tabel->gelar_depan?> &nbsp;<?= $tabel->nama_pelamar?>,&nbsp;<?= $tabel->gelar_belakang?> </p>
-															</div>
-														<?php
-															}else{
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"> Tidak ada isi </p>
-															</div>
-														<?php
-															}
-														?>
+												<div style="margin-left: 35px;"> <!-- Container untuk menggeser ke kanan -->
+													<!-- Nama Lengkap -->
+													<div class="form-group row mb-1 align-items-center">
+														<label for="namaLengkap" class="col-md-2 col-form-label font-weight-bold pl-1">Nama Lengkap:</label>
+														<div class="col-md-9 pl-1">
+															<?php if (isset($tabel->nama_pelamar)) : ?>
+																<p id="namaLengkap" class="form-control-plaintext m-0 pl-1">
+																	<?= htmlspecialchars(trim($tabel->gelar_depan . ' ' . $tabel->nama_pelamar . ', ' . $tabel->gelar_belakang)) ?>
+																</p>
+															<?php else : ?>
+																<p id="namaLengkap" class="form-control-plaintext m-0 pl-1 text-muted">Tidak ada isi</p>
+															<?php endif; ?>
 														</div>
 													</div>
-												</div>
-												<div class="form-group">
-													<div class="col-md-6">
-														<label class="control-label col-md-3">Tempat Lahir:</label>
-														<div class="">
-														<?php
-															if(isset($tabel->tempat_lahir)){
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"><?= $tabel->tempat_lahir?></p>
-															</div>
-														<?php
-															}else{
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"> Tidak ada isi </p>
-															</div>
-														<?php
-															}
-														?>
+
+													<!-- Tempat & Tanggal Lahir -->
+													<div class="form-group row mb-1 align-items-center">
+														<!-- Tempat Lahir -->
+														<label for="tempatLahir" class="col-md-2 col-form-label font-weight-bold pl-1">Tempat Lahir</label>
+														<div class="col-md-3 pl-1">
+															<?php if (isset($tabel->tempat_lahir)) : ?>
+																<p id="tempatLahir" class="form-control-plaintext m-0 pl-1"><?= htmlspecialchars($tabel->tempat_lahir) ?></p>
+															<?php else : ?>
+																<p id="tempatLahir" class="form-control-plaintext m-0 pl-1 text-muted">Tidak ada isi</p>
+															<?php endif; ?>
+														</div>
+
+														<!-- Tanggal Lahir -->
+														<label for="tanggalLahir" class="col-md-2 col-form-label font-weight-bold pl-1">Tanggal Lahir</label>
+														<div class="col-md-3 pl-1">
+															<?php if (isset($tabel->tanggal_lahir)) : ?>
+																<p id="tanggalLahir" class="form-control-plaintext m-0 pl-1"><?= htmlspecialchars($tabel->tanggal_lahir) ?></p>
+															<?php else : ?>
+																<p id="tanggalLahir" class="form-control-plaintext m-0 pl-1 text-muted">Tidak ada isi</p>
+															<?php endif; ?>
 														</div>
 													</div>
-												</div>
-												<div class="form-group">
-													<div class="col-md-6">
-														<label class="control-label col-md-3">Tanggal Lahir:</label>
-														<div class="">
-														<?php
-															if(isset($tabel->tanggal_lahir)){
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"><?= $tabel->tanggal_lahir?></p>
-															</div>
-														<?php
-															}else{
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"> Tidak ada isi </p>
-															</div>
-														<?php
-															}
-														?>
+
+													<!-- Jenis Kelamin & Agama -->
+													<div class="form-group row mb-1 align-items-center">
+														<!-- Jenis Kelamin -->
+														<label for="jenisKelamin" class="col-md-2 col-form-label font-weight-bold pl-1">Jenis Kelamin:</label>
+														<div class="col-md-3 pl-1">
+															<?php if (isset($tabel->jenis_kelamin)) : ?>
+																<p id="jenisKelamin" class="form-control-plaintext m-0 pl-1"><?= htmlspecialchars($tabel->jenis_kelamin) ?></p>
+															<?php else : ?>
+																<p id="jenisKelamin" class="form-control-plaintext m-0 pl-1 text-muted">Tidak ada isi</p>
+															<?php endif; ?>
+														</div>
+
+														<!-- Agama -->
+														<label for="agama" class="col-md-2 col-form-label font-weight-bold pl-1">Agama:</label>
+														<div class="col-md-3 pl-1">
+															<?php if (isset($readagama->agama)) : ?>
+																<p id="agama" class="form-control-plaintext m-0 pl-1"><?= htmlspecialchars($readagama->agama) ?></p>
+															<?php else : ?>
+																<p id="agama" class="form-control-plaintext m-0 pl-1 text-muted">Tidak ada isi</p>
+															<?php endif; ?>
 														</div>
 													</div>
-												</div>
-												<div class="form-group">
-													<div class="col-md-6">
-														<label class="control-label col-md-3">Jenis Kelamin:</label>
-														<div class="">
-														<?php
-															if(isset($tabel->jenis_kelamin)){
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"><?= $tabel->jenis_kelamin?></p>
-															</div>
-														<?php
-															}else{
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"> Tidak ada isi </p>
-															</div>
-														<?php
-															}
-														?>
+
+													<!-- Nomor Handphone & Status -->
+													<div class="form-group row mb-1 align-items-center">
+														<!-- Nomor Handphone -->
+														<label for="noHp" class="col-md-2 col-form-label font-weight-bold pl-1">Nomor Handphone:</label>
+														<div class="col-md-3 pl-1">
+															<?php if (isset($tabel->no_telepon)) : ?>
+																<p id="noHp" class="form-control-plaintext m-0 pl-1"><?= htmlspecialchars($tabel->no_telepon) ?></p>
+															<?php else : ?>
+																<p id="noHp" class="form-control-plaintext m-0 pl-1 text-muted">Tidak ada isi</p>
+															<?php endif; ?>
+														</div>
+
+														<!-- Status -->
+														<label for="statusKawin" class="col-md-2 col-form-label font-weight-bold pl-1">Status:</label>
+														<div class="col-md-3 pl-1">
+															<?php if (isset($status_kawin)) : ?>
+																<p id="statusKawin" class="form-control-plaintext m-0 pl-1"><?= htmlspecialchars($status_kawin) ?></p>
+															<?php else : ?>
+																<p id="statusKawin" class="form-control-plaintext m-0 pl-1 text-muted">Tidak ada isi</p>
+															<?php endif; ?>
 														</div>
 													</div>
-												</div>
-												<div class="form-group">
-													<div class="col-md-6">
-														<label class="control-label col-md-3">Agama:</label>
-														<div class="">
-														<?php
-															if(isset($readagama->agama)){
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"><?= $readagama->agama?></p>
-															</div>
-														<?php
-															}else{
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"> Tidak ada isi </p>
-															</div>
-														<?php
-															}
-														?>
+
+													<!-- Alamat -->
+													<div class="form-group row mb-1 align-items-center">
+														<label for="alamat" class="col-md-2 col-form-label font-weight-bold pl-1">Alamat:</label>
+														<div class="col-md-9 pl-1">
+															<?php if (isset($tabel->alamat)) : ?>
+																<p id="alamat" class="form-control-plaintext m-0 pl-1"><?= htmlspecialchars($tabel->alamat) ?></p>
+															<?php else : ?>
+																<p id="alamat" class="form-control-plaintext m-0 pl-1 text-muted">Tidak ada isi</p>
+															<?php endif; ?>
 														</div>
 													</div>
-												</div>
-												<div class="form-group">
-													<div class="col-md-6">
-														<label class="control-label col-md-3">Nomor Handphone:</label>
-														<div class="">
-														<?php
-															if(isset($tabel->no_telepon)){
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"><?= $tabel->no_telepon?></p>
-															</div>
-														<?php
-															}else{
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"> Tidak ada isi </p>
-															</div>
-														<?php
-															}
-														?>
-														</div>
-													</div>
-												</div>
-												<div class="form-group">
-													<div class="col-md-6">
-														<label class="control-label col-md-3">Status:</label>
-														<div class="">
-														<?php
-															if(isset($status_kawin)){
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"><?= $status_kawin?></p>
-															</div>
-														<?php
-															}else{
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"> Tidak ada isi </p>
-															</div>
-														<?php
-															}
-														?>
-														</div>
-													</div>
-												</div>
-                                                <!--/span-->
-                                            </div>
-											<div class="row">
-												<div class="col-md-12">
-													<div class="form-group">
-														<label class="col-md-3">Alamat:</label>
-														<?php
-															if(isset($tabel->alamat)){
-														?>
-															<div class="col-md-12">
-																<p class="form-control-static"><?= $tabel->alamat?></p>
-															</div>
-														<?php
-															}else{
-														?>
-															<div class="col-md-9">
-																<p class="form-control-static"> Tidak ada isi </p>
-															</div>
-														<?php
-															}
-														?>
-													</div>
-												</div>
-											</div>
+													</div> <!-- Penutup container -->
                                             <!--/row-->
 											<br class="m-t-0 m-b-40">
                                             <h3 class="box-title">B. Formasi dan Pendidikan</h3>
@@ -1371,7 +1289,38 @@
                                                 </div>
                                             </div>
 											<br class="m-t-0 m-b-40">
-                                            <h3 class="box-title">C. Lampiran</h3>
+											<h3 class="box-title">C. Publikasi</h3>
+											<button type="button" class="btn btn-info"><a href="<?= site_url('identitas') ?>"><span style="color: white">Edit</a></button>
+											<hr class="m-t-0 m-b-40">
+                                            <div class="row">
+                                                <div id="tabel-datapublikasi">
+
+                                                </div>
+                                            </div>
+											<div class="row">
+												<div class="col-md-12">
+													<div class="form-group">
+														<label class="col-md-3">Alamat:</label>
+														<?php
+															if(isset($tabel->alamat)){
+														?>
+															<div class="col-md-12">
+																<p class="form-control-static"><?= $tabel->alamat?></p>
+															</div>
+														<?php
+															}else{
+														?>
+															<div class="col-md-9">
+																<p class="form-control-static"> Tidak ada isi </p>
+															</div>
+														<?php
+															}
+														?>
+													</div>
+												</div>
+											</div>
+											<br class="m-t-0 m-b-40">
+                                            <h3 class="box-title">D. Lampiran</h3>
 											 <button type="button" class="btn btn-info"><a href="<?= site_url('lampiran') ?>"><span style="color: white">Edit</a></button>
                                             <hr class="m-t-0 m-b-40">
 											<div class="row">
@@ -2406,6 +2355,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <?php
+	if($date < $datetutup){
+?>
+<?php
 	if($tabel->nama_pelamar != null){
 ?>
 <?php
@@ -2456,20 +2408,45 @@
 <?php
 	}
 ?>
+<?php
+	}else{
+?>
+<div id="alerttopright" class="myadmin-alert myadmin-alert-img alert-warning myadmin-alert-top-right"><img src="<?= base_url('temp/plugins/images/users/default.jpg') ?>" class="img" alt="img"><a href="#" class="closed">&times;</a><h4>Masa pendaftarannya sudah</h4> <b>ditutup</b>.</div>
+<?php
+	}
+?>
 <script type="text/javascript">
-$(".myadmin-alert .closed").click(function(event) {
-	$(this).parents(".myadmin-alert").fadeToggle(350);
-	return false;
-});
-/* Click to close */
-$(".myadmin-alert-click").click(function(event) {
-	$(this).fadeToggle(350);
-	return false;
-});
-$("#alerttopright").fadeToggle(3550);
-</script>
-<?php $this->load->view('scripts') ?>
-<!-- Datatable -->
+	function getTabelpublikasipelamar(){
+        $.ajax({
+            url:'PelamarCntrl/getTabelpublikasipelamar',
+            data:
+            { 
+                send:true,
+            },
+            success:function(data){
+                $("#tabel-datapublikasi").html(data);
+                tooltip._tooltip();
+            }
+        });
+	}
+
+	$(document).ready(function() {
+        getTabelpublikasipelamar();
+    });
+
+	$(".myadmin-alert .closed").click(function(event) {
+		$(this).parents(".myadmin-alert").fadeToggle(350);
+		return false;
+	});
+	/* Click to close */
+	$(".myadmin-alert-click").click(function(event) {
+		$(this).fadeToggle(350);
+		return false;
+	});
+	$("#alerttopright").fadeToggle(3550);
+	</script>
+	<?php $this->load->view('scripts') ?>
+	<!-- Datatable -->
 
 <script type="text/javascript">
     $(document).ready(function() {
