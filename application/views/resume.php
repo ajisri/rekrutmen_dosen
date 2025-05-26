@@ -1353,6 +1353,87 @@
 											<div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
+														<label class="col-md-3">Daftar Riwayat Hidup</label>
+														<label class="col-md-1">:</label>
+														<?php
+															if(isset($drh)){
+																$drh_en = base64_encode($this->encryption->encrypt($drh->path_file));
+														?>
+														<div class="col-md-6">
+															<button type="button" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light">
+																<a href="<?= base_url('PelamarCntrl/preview_file/'.$drh_en); ?>" target="_blank" style="color:black;">Lihat</a>
+																<!-- <a href="<?= site_url('')?><?= $drh->path_file?>" target="_blank" style="color:black;">Lihat</a> -->
+															</button>
+														</div>
+														<?php
+															}else{
+														?>
+															<div class="col-md-6">
+																<button type="submit" disabled class="fcbtn btn btn-danger btn-1d waves-effect waves-light">Belum Upload</button>
+															</div>
+														<?php
+															}
+														?>
+                                                    </div>
+                                                </div>
+                                            </div>
+											<div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+														<label class="col-md-3">Pengalaman Kerja</label>
+														<label class="col-md-1">:</label>
+														<?php
+															if(isset($bpk)){
+																$bpk_en = base64_encode($this->encryption->encrypt($bpk->path_file));
+														?>
+														<div class="col-md-6">
+															<button type="button" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light">
+																<a href="<?= base_url('PelamarCntrl/preview_file/'.$bpk_en); ?>" target="_blank" style="color:black;">Lihat</a>
+																<!-- <a href="<?= site_url('')?><?= $bpk->path_file?>" target="_blank" style="color:black;">Lihat</a> -->
+															</button>
+														</div>
+														<?php
+															}else{
+														?>
+															<div class="col-md-6">
+																<button type="submit" disabled class="fcbtn btn btn-danger btn-1d waves-effect waves-light">Belum Upload</button>
+															</div>
+														<?php
+															}
+														?>
+                                                    </div>
+                                                </div>
+                                            </div>
+											<div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+														<label class="col-md-3">Pelatihan</label>
+														<label class="col-md-1">:</label>
+														<?php
+															if(isset($bpl)){
+																$bpl_en = base64_encode($this->encryption->encrypt($bpl->path_file));
+														?>
+														<div class="col-md-6">
+															<button type="button" class="fcbtn btn btn-outline btn-success btn-1d waves-effect waves-light">
+																<a href="<?= base_url('PelamarCntrl/preview_file/'.$bpl_en); ?>" target="_blank" style="color:black;">Lihat</a>
+																<!-- <a href="<?= site_url('')?><?= $bpl->path_file?>" target="_blank" style="color:black;">Lihat</a> -->
+															</button>
+														</div>
+														<?php
+															}else{
+														?>
+															<div class="col-md-6">
+																<button type="submit" disabled class="fcbtn btn btn-danger btn-1d waves-effect waves-light">Belum Upload</button>
+															</div>
+														<?php
+															}
+														?>
+                                                    </div>
+                                                </div>
+                                            </div>
+											<div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
 														<label class="col-md-3">KTP</label>
 														<label class="col-md-1">:</label>
 														<?php

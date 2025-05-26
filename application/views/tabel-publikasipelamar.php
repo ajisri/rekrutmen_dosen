@@ -22,7 +22,7 @@
                 <td class="text-center"><?= $value->jenis_publikasi ?></td>
                 <td class="text-center"><?= $value->url_publikasi ?></td>
                 <td class="text-center">
-                    <a href="<?= site_url('pelamarCntrl/dl_file?file=' . substr($value->path_file,1) )?>" class="editData" id="<?= $value->id_publikasi ?>" target="_blank"><button type="button" class="btn btn-warning btn-outline btn-circle btn-sm m-r-5 dotip" data-toggle="tooltip" title="Lihat File"><i class="ti-file"></i></button></a>
+                    <a href="<?= site_url('pelamarCntrl/dl_file?file=' . substr($value->path_file,1) )?>" class="" id="<?= $value->id_publikasi ?>" target="_blank"><button type="button" class="btn btn-warning btn-outline btn-circle btn-sm m-r-5 dotip" data-toggle="tooltip" title="Lihat File"><i class="ti-file"></i></button></a>
                 <?php
                     $level = $this->session->userdata('level');
                     if($level == ''){

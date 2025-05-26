@@ -394,6 +394,8 @@ class PelamarCntrl extends CI_Controller {
             $tabelpelamar = $this->Modelpelamar->readDataPelamarId($id_pelamar)->row();
             $tablePelamar = $this->Modelpelamar->readDataVerifikasiPelamarId($id_pelamar)->row();
 
+            $sorting = $this->Modelpelamar->readDataPelamarPublikasi($id_pelamar);
+
             $lamaran = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'lamaran'], null, null)->row();
             $ktp = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'ktp'], null, null)->row();
             $foto = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'foto'], null, null)->row();
@@ -422,6 +424,9 @@ class PelamarCntrl extends CI_Controller {
             $akreditasi3 = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'akreditasi3'], null, null)->row();
             $akreditasiprodi3 = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'akreditasiprodi3'], null, null)->row();
             $sertifikat = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'sertifikat'], null, null)->row();
+            $drh = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'drh'], null, null)->row();
+            $bpk = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'bpk'], null, null)->row();
+            $bpl = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'bpl'], null, null)->row();
 
             $data = array(
                 'title' => 'REKRUTMEN SDM UNIVERSITAS DIPONEGORO',
@@ -435,6 +440,10 @@ class PelamarCntrl extends CI_Controller {
                 'idpelamar' => $id_pelamar,
                 'tabelpelamar' => $tabelpelamar,
                 'tablePelamar' => $tablePelamar,
+                'publikasi' => $sorting,
+                'drh' => $drh,
+                'bpk' => $bpk,
+                'bpl' => $bpl,
                 'lamaran' => $lamaran,
                 'ktp' => $ktp,
                 'foto' => $foto,
@@ -4188,6 +4197,9 @@ public function editPublikasiPelamar() {
             $akreditasi3 = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'akreditasi3'], null, null)->row();
             $akreditasiprodi3 = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'akreditasiprodi3'], null, null)->row();
             $sertifikat = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'sertifikat'], null, null)->row();
+            $drh = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'drh'], null, null)->row();
+            $bpk = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'bpk'], null, null)->row();
+            $bpl = $this->Modelpelamar->read('file_upload', ['nik' => $id_pelamar, 'kode_unik' => $id_pelamar . 'bpl'], null, null)->row();
 
             $tabel = $this->Modelpelamar->readDataPelamar($nik)->row();
             $data = [
@@ -4241,6 +4253,9 @@ public function editPublikasiPelamar() {
                 'akreditasi3' => $akreditasi3,
                 'akreditasiprodi3' => $akreditasiprodi3,
                 'sertifikat' => $sertifikat,
+                'drh' => $drh,
+                'bpk' => $bpk,
+                'bpl' => $bpl,
                 'statuspelamar' => $statuspelamar,
                 'tabel' => $tabel
             ];

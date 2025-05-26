@@ -477,17 +477,17 @@
 		}
 
 		function readDataPelamarPublikasi($nik) {
-    $query = $this->db->query("
-        SELECT tb_publikasi.*, 
-               tb_jenispublikasi.jenis_publikasi, 
-               file_uploadpublikasi.path_file 
-        FROM tb_publikasi 
-        LEFT JOIN tb_jenispublikasi ON tb_publikasi.id_jenispublikasi = tb_jenispublikasi.id_jenispublikasi 
-        LEFT JOIN file_uploadpublikasi ON tb_publikasi.id_publikasi = file_uploadpublikasi.id_publikasi 
-        WHERE tb_publikasi.nik = '$nik'
-    ");
-    return $query->result();
-}
+			$query = $this->db->query("
+				SELECT tb_publikasi.*, 
+					tb_jenispublikasi.jenis_publikasi, 
+					file_uploadpublikasi.path_file 
+				FROM tb_publikasi 
+				LEFT JOIN tb_jenispublikasi ON tb_publikasi.id_jenispublikasi = tb_jenispublikasi.id_jenispublikasi 
+				LEFT JOIN file_uploadpublikasi ON tb_publikasi.id_publikasi = file_uploadpublikasi.id_publikasi 
+				WHERE tb_publikasi.nik = '$nik'
+			");
+			return $query->result();
+		}
 
 		function readDataPelamarPublikasiId($id){
 			$query = $this->db->query("select * from tb_publikasi left join tb_jenispublikasi on tb_publikasi.id_jenispublikasi = tb_jenispublikasi.id_jenispublikasi where tb_publikasi.id_publikasi = '$id'");
